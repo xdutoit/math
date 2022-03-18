@@ -23,7 +23,7 @@
             let tr_obj = getAncestorByTag(e.target, 'tr');
             if (tr_obj) {
                 let fct_id = tr_obj.getAttribute('id');
-                let inp_in = parseInt(document.querySelector('#'+fct_id+' .inp_in').value);
+                let inp_in = parseFloat(document.querySelector('#'+fct_id+' .inp_in').value);
                 if(isNaN(inp_in)){
                     alert('Veuillez entrer un nombre valide.');
                     return false;
