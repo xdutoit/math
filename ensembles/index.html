@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ensembles</title>
+    <link rel="stylesheet" href="../style/math_page.css">
+    <script src="../script/mathjax/mathjax-config.js" defer></script>
+    <script src="../script/mathjax/tex-svg.js" id="MathJax-script" defer></script>
+    <script src="../script/github_utils_general.js" defer></script>
+    <script src="script/ensembles_utils.js" defer></script>
+    <script src="script/ensembles_onload.js" defer></script>
+</head>
+<body>
+    <div class="cont_ext">
+        <section>
+            <h1 id="complement">Complément</h1>
+            <div class="div_subsection">
+                <h2 id="complement_def">Définition</h2>
+                Le <strong>complément</strong> d'un ensemble $A$, noté $\overline{A}$, est l'ensemble des éléments qui ne sont <strong>pas</strong> inclus dans $A$:
+                <div class="div_definition_mathjax">
+                    $\overline{A} = \{x \; | \; x \notin A\}$
+                </div>
+            </div>
+            <div class="div_subsection">
+                <h2 id="complement_venn">Diagramme de Venn</h2>
+                <div class="div_Venn_ext">
+                    <div class="div_Venn_int div_Venn_int2">
+                        <canvas id="cnv_compl_av" class="avant" width="200" height="120"></canvas>
+                        <canvas id="cnv_compl_A" class="z1" width="200" height="120"></canvas>
+                        <canvas id="cnv_compl_nA" class="z2" width="200" height="120"></canvas>
+                    </div>
+                    <div class="div_Venn_cbs">
+                        <span class="green"><input type="checkbox" name="compl_A" id="compl_A" checked><label for="compl_A">$A$</label></span><br>
+                        <span class="red"><input type="checkbox" name="compl_nA" id="compl_nA" checked><label for="compl_nA">$\overline{A}$</label></span>
+                    </div>
+                </div>
+            </div>
+            <div class="div_subsection">
+                <h2 id="complement_ext">Ensemble en extension</h2>
+                On considère l'univers des nombres entiers de $1$ à $10$: $U=\{1;2;3;4;5;6;7;8;9;10\}$.
+                <table class="tab_ens">
+                    <tr class="green" id="ens_compl_a">
+                        <td>$A$</td>
+                        <td>$=\{$</td>
+                        <td id="ens_compl_a0" class="td_ens td_ens_interactive td_active">$1;$</td>
+                        <td id="ens_compl_a1" class="td_ens td_ens_interactive">$2;$</td>
+                        <td id="ens_compl_a2" class="td_ens td_ens_interactive">$3;$</td>
+                        <td id="ens_compl_a3" class="td_ens td_ens_interactive">$4;$</td>
+                        <td id="ens_compl_a4" class="td_ens td_ens_interactive td_active">$5;$</td>
+                        <td id="ens_compl_a5" class="td_ens td_ens_interactive td_active">$6;$</td>
+                        <td id="ens_compl_a6" class="td_ens td_ens_interactive">$7;$</td>
+                        <td id="ens_compl_a7" class="td_ens td_ens_interactive td_active">$8;$</td>
+                        <td id="ens_compl_a8" class="td_ens td_ens_interactive">$9;$</td>
+                        <td id="ens_compl_a9" class="td_ens td_ens_interactive td_active">$10$</td>
+                        <td>$\}$</td>
+                        <td class="td_empty"></td>
+                    </tr>
+                    <tr class="red" id="ens_compl_res">
+                        <td>$\overline{A}$</td>
+                        <td>$=\{$</td>
+                        <td id="ens_compl_res0" class="td_ens">$1;$</td>
+                        <td id="ens_compl_res1" class="td_ens td_active">$2;$</td>
+                        <td id="ens_compl_res2" class="td_ens td_active">$3;$</td>
+                        <td id="ens_compl_res3" class="td_ens td_active">$4;$</td>
+                        <td id="ens_compl_res4" class="td_ens">$5;$</td>
+                        <td id="ens_compl_res5" class="td_ens">$6;$</td>
+                        <td id="ens_compl_res6" class="td_ens td_active">$7;$</td>
+                        <td id="ens_compl_res7" class="td_ens">$8;$</td>
+                        <td id="ens_compl_res8" class="td_ens td_active">$9;$</td>
+                        <td id="ens_compl_res9" class="td_ens">$10$</td>
+                        <td>$\}$</td>
+                        <td class="td_empty"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="div_subsection">
+                <h2 id="complement_interv">Intervalles</h2>
+                On considère l'univers des nombres réels: $U=\mathbb{R}$.
+                <table class="tab_interv">
+                    <tr>
+                        <td></td>
+                        <th>borne inférieure</th>
+                        <th>borne supérieure</th>
+                        <td></td>
+                    </tr>
+                    <tr class="green">
+                        <td>$A$</td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_comp_a_from_inf" id="inp_interv_comp_a_from_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_comp_a_from_val" id="inp_interv_comp_a_from_val" value="-3">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_comp_a_from_inclus" id="inp_interv_comp_a_from_inclus" checked>
+                            <label for="inp_interv_comp_a_from_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_comp_a_from_inf" id="inp_interv_comp_a_from_inf_1" value="1">
+                            <label for="inp_interv_comp_a_from_inf">$-\infty$</label>
+                        </td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_comp_a_to_inf" id="inp_interv_comp_a_to_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_comp_a_to_val" id="inp_interv_comp_a_to_val" value="2">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_comp_a_to_inclus" id="inp_interv_comp_a_to_inclus">
+                            <label for="inp_interv_comp_a_to_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_comp_a_to_inf" id="inp_interv_comp_a_to_inf_1" value="1">
+                            <label for="inp_interv_comp_a_to_inf">$+\infty$</label>
+                        </td>
+                        <td>
+                            $A=$<span id="sp_interv_comp_a_str">$[-3;2[$</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="div_interv_ext">
+                    <canvas id="cnv_interv_comp" width="350" height="90"></canvas>
+                    <span id="sp_interv_comp_A" class="green">$A$</span>
+                    <span id="sp_interv_comp_res" class="red">$\overline{A}$</span>
+                    <span id="sp_interv_comp_lab0" class="red"></span>
+                    <span id="sp_interv_comp_lab1" class="red"></span>
+                </div>
+                <div class="div_interv_res red">
+                    <span class="red" id="sp_interv_comp_resStr">$\overline{A}=]-\infty;-3] \; \cup \; ]2;+\infty[$</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h1 id="inter">Intersection</h1>
+            <div class="div_subsection">
+                <h2 id="inter_def">Définition</h2>
+                L'<strong>intersection</strong> de deux ensembles $A$ et $B$, notée $A \cap B$, est l'ensemble des éléments inclus dans $A$ <strong>et</strong> dans $B$:
+                <div class="div_definition_mathjax">
+                    $A \cap B = \{x \; | \; x \in A \; $et$ \; x \in B\}$
+                </div>
+            </div>
+            <div class="div_subsection">
+                <h2 id="inter_venn">Diagramme de Venn</h2>
+                <div class="div_Venn_ext">
+                    <div class="div_Venn_int div_Venn_int2">
+                        <canvas id="cnv_inter_av" class="avant" width="200" height="120"></canvas>
+                        <canvas id="cnv_inter_A" class="z1" width="200" height="120"></canvas>
+                        <canvas id="cnv_inter_B" class="z2" width="200" height="120"></canvas>
+                        <canvas id="cnv_inter_AiB" class="z3" width="200" height="120"></canvas>
+                    </div>
+                    <div class="div_Venn_cbs">
+                        <span class="green"><input type="checkbox" name="inter_A" id="inter_A" checked><label for="inter_A">$A$</label></span><br>
+                        <span class="blue"><input type="checkbox" name="inter_B" id="inter_B" checked><label for="inter_B">$B$</label></span><br>
+                        <span class="red"><input type="checkbox" name="inter_AiB" id="inter_AiB" checked><label for="inter_AiB">$A \cap B$</label></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="div_subsection">
+                <h2 id="inter_ext">Ensemble en extension</h2>
+                On considère l'univers des nombres entiers de $1$ à $10$: $U=\{1;2;3;4;5;6;7;8;9;10\}$.
+                <table class="tab_ens">
+                    <tr class="green" id="ens_inter_a">
+                        <td>$A$</td>
+                        <td>$=\{$</td>
+                        <td id="ens_inter_a0" class="td_ens td_ens_interactive td_active">$1;$</td>
+                        <td id="ens_inter_a1" class="td_ens td_ens_interactive">$2;$</td>
+                        <td id="ens_inter_a2" class="td_ens td_ens_interactive">$3;$</td>
+                        <td id="ens_inter_a3" class="td_ens td_ens_interactive">$4;$</td>
+                        <td id="ens_inter_a4" class="td_ens td_ens_interactive td_active">$5;$</td>
+                        <td id="ens_inter_a5" class="td_ens td_ens_interactive td_active">$6;$</td>
+                        <td id="ens_inter_a6" class="td_ens td_ens_interactive">$7;$</td>
+                        <td id="ens_inter_a7" class="td_ens td_ens_interactive td_active">$8;$</td>
+                        <td id="ens_inter_a8" class="td_ens td_ens_interactive">$9;$</td>
+                        <td id="ens_inter_a9" class="td_ens td_ens_interactive td_active">$10$</td>
+                        <td>$\}$</td>
+                        <td class="td_empty"></td>
+                    </tr>
+                    <tr class="blue" id="ens_inter_b">
+                        <td>$B$</td>
+                        <td>$=\{$</td>
+                        <td id="ens_inter_b0" class="td_ens td_ens_interactive">$1;$</td>
+                        <td id="ens_inter_b1" class="td_ens td_ens_interactive td_active">$2;$</td>
+                        <td id="ens_inter_b2" class="td_ens td_ens_interactive td_active">$3;$</td>
+                        <td id="ens_inter_b3" class="td_ens td_ens_interactive">$4;$</td>
+                        <td id="ens_inter_b4" class="td_ens td_ens_interactive td_active">$5;$</td>
+                        <td id="ens_inter_b5" class="td_ens td_ens_interactive">$6;$</td>
+                        <td id="ens_inter_b6" class="td_ens td_ens_interactive">$7;$</td>
+                        <td id="ens_inter_b7" class="td_ens td_ens_interactive td_active">$8;$</td>
+                        <td id="ens_inter_b8" class="td_ens td_ens_interactive td_active">$9;$</td>
+                        <td id="ens_inter_b9" class="td_ens td_ens_interactive td_active">$10$</td>
+                        <td>$\}$</td>
+                        <td class="td_empty"></td>
+                    </tr>
+                    <tr class="red" id="ens_inter_res">
+                        <td>$A \cap B$</td>
+                        <td>$=\{$</td>
+                        <td id="ens_inter_res0" class="td_ens">$1;$</td>
+                        <td id="ens_inter_res1" class="td_ens">$2;$</td>
+                        <td id="ens_inter_res2" class="td_ens">$3;$</td>
+                        <td id="ens_inter_res3" class="td_ens">$4;$</td>
+                        <td id="ens_inter_res4" class="td_ens td_active">$5;$</td>
+                        <td id="ens_inter_res5" class="td_ens">$6;$</td>
+                        <td id="ens_inter_res6" class="td_ens">$7;$</td>
+                        <td id="ens_inter_res7" class="td_ens td_active">$8;$</td>
+                        <td id="ens_inter_res8" class="td_ens">$9;$</td>
+                        <td id="ens_inter_res9" class="td_ens td_active">$10$</td>
+                        <td>$\}$</td>
+                        <td class="td_empty"></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="div_subsection">
+                <h2 id="inter_interv">Intervalles</h2>
+                On considère l'univers des nombres réels: $U=\mathbb{R}$.
+                <table class="tab_interv">
+                    <tr>
+                        <td></td>
+                        <th>borne inférieure</th>
+                        <th>borne supérieure</th>
+                        <td></td>
+                    </tr>
+                    <tr class="green">
+                        <td>$A$</td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_inter_a_from_inf" id="inp_interv_inter_a_from_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_inter_a_from_val" id="inp_interv_inter_a_from_val" value="-3">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_inter_a_from_inclus" id="inp_interv_inter_a_from_inclus" checked>
+                            <label for="inp_interv_inter_a_from_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_inter_a_from_inf" id="inp_interv_inter_a_from_inf_1" value="1">
+                            <label for="inp_interv_inter_a_from_inf">$-\infty$</label>
+                        </td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_inter_a_to_inf" id="inp_interv_inter_a_to_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_inter_a_to_val" id="inp_interv_inter_a_to_val" value="2">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_inter_a_to_inclus" id="inp_interv_inter_a_to_inclus">
+                            <label for="inp_interv_inter_a_to_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_inter_a_to_inf" id="inp_interv_inter_a_to_inf_1" value="1">
+                            <label for="inp_interv_inter_a_to_inf">$+\infty$</label>
+                        </td>
+                        <td>
+                            $A=$<span id="sp_interv_inter_a_str">$[-3;2[$</span>
+                        </td>
+                    </tr>
+                    <tr class="blue">
+                        <td>$B$</td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_inter_b_from_inf" id="inp_interv_inter_b_from_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_inter_b_from_val" id="inp_interv_inter_b_from_val" value="-2">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_inter_b_from_inclus" id="inp_interv_inter_b_from_inclus" checked>
+                            <label for="inp_interv_inter_b_from_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_inter_b_from_inf" id="inp_interv_inter_b_from_inf_1" value="1">
+                            <label for="inp_interv_inter_b_from_inf">$-\infty$</label>
+                        </td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_inter_b_to_inf" id="inp_interv_inter_b_to_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_inter_b_to_val" id="inp_interv_inter_b_to_val" value="3">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_inter_b_to_inclus" id="inp_interv_inter_b_to_inclus">
+                            <label for="inp_interv_inter_b_to_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_inter_b_to_inf" id="inp_interv_inter_b_to_inf_1" value="1">
+                            <label for="inp_interv_inter_b_to_inf">$+\infty$</label>
+                        </td>
+                        <td>
+                            $B=$<span id="sp_interv_inter_b_str">$[-2;3[$</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="div_interv_ext">
+                    <canvas id="cnv_interv_inter" width="350" height="120"></canvas>
+                    <span id="sp_interv_inter_A" class="green">$A$</span>
+                    <span id="sp_interv_inter_B" class="blue">$B$</span>
+                    <span id="sp_interv_inter_res" class="red">$A \cap B$</span>
+                    <span id="sp_interv_inter_lab0" class="red"></span>
+                    <span id="sp_interv_inter_lab1" class="red"></span>
+                    <span id="sp_interv_inter_lab2" class="red"></span>
+                    <span id="sp_interv_inter_lab3" class="red"></span>
+                </div>
+                <div class="div_interv_res red">
+                    <span class="red" id="sp_interv_inter_resStr">$A \cap B=]-\infty;-3] \; \cup \; ]2;+\infty[$</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h1 id="union">Union</h1>
+            <div class="div_subsection">
+                <h2 id="union_def">Définition</h2>
+                L'<strong>union</strong> de deux ensembles $A$ et $B$, notée $A \cap B$, est l'ensemble des éléments inclus dans $A$ <strong>ou</strong> dans $B$:
+                <div class="div_definition_mathjax">
+                    $A \cup B = \{x \; | \; x \in A \; $ou$ \; x \in B\}$
+                </div>
+                Cette union n'est pas exclusive, les éléments dans $A$ et $B$ sont aussi inclus (ce n'est pas un "soit...soit").
+            </div>
+
+            <div class="div_subsection">
+                <h2 id="union_venn">Diagramme de Venn</h2>
+                <div class="div_Venn_ext">
+                    <div class="div_Venn_int div_Venn_int2">
+                        <canvas id="cnv_union_av" class="avant" width="200" height="120"></canvas>
+                        <canvas id="cnv_union_A" class="z1" width="200" height="120"></canvas>
+                        <canvas id="cnv_union_B" class="z2" width="200" height="120"></canvas>
+                        <canvas id="cnv_union_AuB" class="z3" width="200" height="120"></canvas>
+                    </div>
+                    <div class="div_Venn_cbs">
+                        <span class="green"><input type="checkbox" name="union_A" id="union_A" checked><label for="union_A">$A$</label></span><br>
+                        <span class="blue"><input type="checkbox" name="union_B" id="union_B" checked><label for="union_B">$B$</label></span><br>
+                        <span class="red"><input type="checkbox" name="union_AuB" id="union_AuB" checked><label for="union_AuB">$A \cup B$</label></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="div_subsection">
+                <h2 id="union_ext">Ensemble en extension</h2>
+                On considère l'univers des nombres entiers de $1$ à $10$: $U=\{1;2;3;4;5;6;7;8;9;10\}$.
+                <table class="tab_ens">
+                    <tr class="green" id="ens_union_a">
+                        <td>$A$</td>
+                        <td>$=\{$</td>
+                        <td id="ens_union_a0" class="td_ens td_ens_interactive td_active">$1;$</td>
+                        <td id="ens_union_a1" class="td_ens td_ens_interactive">$2;$</td>
+                        <td id="ens_union_a2" class="td_ens td_ens_interactive">$3;$</td>
+                        <td id="ens_union_a3" class="td_ens td_ens_interactive">$4;$</td>
+                        <td id="ens_union_a4" class="td_ens td_ens_interactive td_active">$5;$</td>
+                        <td id="ens_union_a5" class="td_ens td_ens_interactive td_active">$6;$</td>
+                        <td id="ens_union_a6" class="td_ens td_ens_interactive">$7;$</td>
+                        <td id="ens_union_a7" class="td_ens td_ens_interactive td_active">$8;$</td>
+                        <td id="ens_union_a8" class="td_ens td_ens_interactive">$9;$</td>
+                        <td id="ens_union_a9" class="td_ens td_ens_interactive td_active">$10$</td>
+                        <td>$\}$</td>
+                        <td class="td_empty"></td>
+                    </tr>
+                    <tr class="blue" id="ens_union_b">
+                        <td>$B$</td>
+                        <td>$=\{$</td>
+                        <td id="ens_union_b0" class="td_ens td_ens_interactive">$1;$</td>
+                        <td id="ens_union_b1" class="td_ens td_ens_interactive td_active">$2;$</td>
+                        <td id="ens_union_b2" class="td_ens td_ens_interactive td_active">$3;$</td>
+                        <td id="ens_union_b3" class="td_ens td_ens_interactive">$4;$</td>
+                        <td id="ens_union_b4" class="td_ens td_ens_interactive td_active">$5;$</td>
+                        <td id="ens_union_b5" class="td_ens td_ens_interactive">$6;$</td>
+                        <td id="ens_union_b6" class="td_ens td_ens_interactive">$7;$</td>
+                        <td id="ens_union_b7" class="td_ens td_ens_interactive td_active">$8;$</td>
+                        <td id="ens_union_b8" class="td_ens td_ens_interactive td_active">$9;$</td>
+                        <td id="ens_union_b9" class="td_ens td_ens_interactive td_active">$10$</td>
+                        <td>$\}$</td>
+                        <td class="td_empty"></td>
+                    </tr>
+                    <tr class="red" id="ens_union_res">
+                        <td>$A \cup B$</td>
+                        <td>$=\{$</td>
+                        <td id="ens_union_res0" class="td_ens td_active">$1;$</td>
+                        <td id="ens_union_res1" class="td_ens td_active">$2;$</td>
+                        <td id="ens_union_res2" class="td_ens td_active">$3;$</td>
+                        <td id="ens_union_res3" class="td_ens">$4;$</td>
+                        <td id="ens_union_res4" class="td_ens td_active">$5;$</td>
+                        <td id="ens_union_res5" class="td_ens td_active">$6;$</td>
+                        <td id="ens_union_res6" class="td_ens">$7;$</td>
+                        <td id="ens_union_res7" class="td_ens td_active">$8;$</td>
+                        <td id="ens_union_res8" class="td_ens td_active">$9;$</td>
+                        <td id="ens_union_res9" class="td_ens td_active">$10$</td>
+                        <td>$\}$</td>
+                        <td class="td_empty"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="div_subsection">
+                <h2 id="union_interv">Intervalles</h2>
+                On considère l'univers des nombres réels: $U=\mathbb{R}$.
+                <table class="tab_interv">
+                    <tr>
+                        <td></td>
+                        <th>borne inférieure</th>
+                        <th>borne supérieure</th>
+                        <td></td>
+                    </tr>
+                    <tr class="green">
+                        <td>$A$</td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_union_a_from_inf" id="inp_interv_union_a_from_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_union_a_from_val" id="inp_interv_union_a_from_val" value="-3">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_union_a_from_inclus" id="inp_interv_union_a_from_inclus" checked>
+                            <label for="inp_interv_union_a_from_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_union_a_from_inf" id="inp_interv_union_a_from_inf_1" value="1">
+                            <label for="inp_interv_union_a_from_inf">$-\infty$</label>
+                        </td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_union_a_to_inf" id="inp_interv_union_a_to_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_union_a_to_val" id="inp_interv_union_a_to_val" value="2">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_union_a_to_inclus" id="inp_interv_union_a_to_inclus">
+                            <label for="inp_interv_union_a_to_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_union_a_to_inf" id="inp_interv_union_a_to_inf_1" value="1">
+                            <label for="inp_interv_union_a_to_inf">$+\infty$</label>
+                        </td>
+                        <td>
+                            $A=$<span id="sp_interv_union_a_str">$[-3;2[$</span>
+                        </td>
+                    </tr>
+                    <tr class="blue">
+                        <td>$B$</td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_union_b_from_inf" id="inp_interv_union_b_from_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_union_b_from_val" id="inp_interv_union_b_from_val" value="-2">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_union_b_from_inclus" id="inp_interv_union_b_from_inclus" checked>
+                            <label for="inp_interv_union_b_from_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_union_b_from_inf" id="inp_interv_union_b_from_inf_1" value="1">
+                            <label for="inp_interv_union_b_from_inf">$-\infty$</label>
+                        </td>
+                        <td>
+                            <input class="inp_interv" type="radio" name="inp_interv_union_b_to_inf" id="inp_interv_union_b_to_inf_0" value="0" checked>
+                            <input class="inp_interv inp_short" name="inp_interv_union_b_to_val" id="inp_interv_union_b_to_val" value="3">
+                            <input class="inp_interv" type="checkbox" name="inp_interv_union_b_to_inclus" id="inp_interv_union_b_to_inclus">
+                            <label for="inp_interv_union_b_to_inclus">inclus</label>
+                            <br>
+                            <input class="inp_interv" type="radio" name="inp_interv_union_b_to_inf" id="inp_interv_union_b_to_inf_1" value="1">
+                            <label for="inp_interv_union_b_to_inf">$+\infty$</label>
+                        </td>
+                        <td>
+                            $B=$<span id="sp_interv_union_b_str">$[-2;3[$</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="div_interv_ext">
+                    <canvas id="cnv_interv_union" width="350" height="120"></canvas>
+                    <span id="sp_interv_union_A" class="green">$A$</span>
+                    <span id="sp_interv_union_B" class="blue">$B$</span>
+                    <span id="sp_interv_union_res" class="red">$A \cup B$</span>
+                    <span id="sp_interv_union_lab0" class="red"></span>
+                    <span id="sp_interv_union_lab1" class="red"></span>
+                    <span id="sp_interv_union_lab2" class="red"></span>
+                    <span id="sp_interv_union_lab3" class="red"></span>
+                </div>
+                <div class="div_interv_res red">
+                    <span class="red" id="sp_interv_union_resStr">$A \cup B=[-3;3[$</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

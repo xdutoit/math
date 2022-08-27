@@ -1,0 +1,108 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('fonts/Montserrat-VariableFont_wght.ttf');
+}
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+.cont_ext{
+    width: 600px;
+    margin: 0px auto;
+}
+.cont_ext>section>h1{
+	border-bottom: 1px solid black;
+}
+.div_subsection{
+    margin-bottom: 2em;
+}
+.div_subsection>h2{
+    font-size: 1.1em;
+    padding: .5em 3em .5em 1em;
+    margin: 0 0 .5em 0;
+    background-color: #CCC;
+}
+.div_definition_mathjax{
+    margin: 1em 0;
+    text-align: center;
+}
+/* couleurs texte */
+.green{
+    color: rgb(0,127,0);
+}
+.blue{
+    color: rgb(0,0,255);
+}
+.red{
+    color: rgb(255,0,0);
+}
+/* Venn */
+.div_Venn_ext{
+    display: flex;
+}
+.div_Venn_int2{ /* container pour diagramme de Venn à 2 ensembles */
+    position: relative;
+    border: 2px solid black;
+    width: 200px;
+    height: 120px;
+}
+.div_Venn_int>canvas{
+    position: absolute;
+}
+.div_Venn_int>.avant{
+    z-index: 100;
+}
+.div_Venn_int>.z0{
+    z-index: 0;
+}
+.div_Venn_int>.z1{
+    z-index: 1;
+}
+.div_Venn_int>.z2{
+    z-index: 2;
+}
+.div_Venn_int>.z3{
+    z-index: 3;
+}
+.div_Venn_int>.z4{
+    z-index: 4;
+}
+.div_Venn_int>.z5{
+    z-index: 5;
+}
+.div_Venn_int>.z6{
+    z-index: 6;
+}
+.div_Venn_int>.z7{
+    z-index: 7;
+}
+/* ensembles en extension */
+.tab_ens{
+    margin: 1em auto;
+}
+.td_ens_interactive{
+    cursor: pointer;
+}
+.td_ens:not(.td_active){
+    opacity: .1;
+}
+/* intervalle */
+.inp_short{
+    width: 3em;
+}
+.tab_interv{
+    border-collapse: collapse;
+}
+.tab_interv td, .tab_interv th{
+    padding: 1em;
+    border: 1px solid black;
+}
+.div_interv_ext{
+    position: relative;
+}
+.div_interv_ext>span{
+    position: absolute;
+    left: 0px;
+}
+.div_interv_res{
+    text-align: center;
+}
