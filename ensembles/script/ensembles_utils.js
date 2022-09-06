@@ -484,121 +484,25 @@ function IntervDessinerInter(){
     // traits rouges verticaux + étiquettes
     let bornes = IntervCalculerBornes(ens_liste);
     IntervDessinerTraitsRouges(ctx_interv_inter, 'interv_inter', ens_liste, bornes, 3);
-   
 
     // intervalles
     IntervDessinerIntervalle(ctx_interv_inter, ens_liste, bornes, ['green', 'blue'], [0,1]);
 
-    // calculer + dessiner intersection
-    let AInterStr = '';
-
-    // partie inférieure
-    if(ens_liste[0]['from_inf'] && ens_liste[1]['from_inf']){
-        // - infini
-        AInterStr = ']-\\infty;';
-        // calculer borne supérieure
-        // + infini ?
-        if(ens_liste[0]['to_inf'] && ens_liste[1]['to_inf']){
-            AInterStr += '+\\infty[';
-            IntervDessinerIntervalle(ctx_interv_inter, [{'from':NaN, 'from_inf': true, 'from_incl':false, 'to':NaN, 'to_inf': true, 'to_incl': false}], bornes, ['red'], [2]);
-        }
-        else{
-            // au moins un des ens ne va pas à +Inf
-            let to, to_incl;
-            if(ens_liste[0]['to_inf']){
-                to = ens_liste[1]['to'];
-                to_incl = ens_liste[1]['to_incl'];
-            }
-            else if(ens_liste[1]['to_inf']){
-                to = ens_liste[0]['to'];
-                to_incl = ens_liste[0]['to_incl'];
-            }
-            else{
-                if(ens_liste[0]['to'] < ens_liste[1]['to']){
-                    to = ens_liste[0]['to'];
-                    to_incl = ens_liste[0]['to_incl'];
-
-                }
-                else if(ens_liste[0]['to'] > ens_liste[1]['to']){
-                    to = ens_liste[1]['to'];
-                    to_incl = ens_liste[1]['to_incl'];
-                }
-                else{
-                    to = ens_liste[0]['to'];
-                    to_incl = ens_liste[0]['to_incl'] && ens_liste[0]['to_incl'];
-                }
-            }
-            AInterStr += to+(to_incl?']':'[');
-            IntervDessinerIntervalle(ctx_interv_inter, [{'from':NaN, 'from_inf': true, 'from_incl':false, 'to':to, 'to_inf': false, 'to_incl':to_incl}], bornes, ['red'], [2]);
-        }
-    }
-    else{
-        // borne inf
-        let from, from_incl;
-        if(ens_liste[0]['from_inf']){
-            from = ens_liste[1]['from'];
-            from_incl = ens_liste[1]['from_incl'];
-        }
-        else if(ens_liste[1]['from_inf']){
-            from = ens_liste[0]['from'];
-            from_incl = ens_liste[0]['from_incl'];
-        }
-        else{
-            if(ens_liste[0]['from'] > ens_liste[1]['from']){
-                from = ens_liste[0]['from'];
-                from_incl = ens_liste[0]['from_incl'];
-
-            }
-            else if(ens_liste[0]['from'] < ens_liste[1]['from']){
-                from = ens_liste[1]['from'];
-                from_incl = ens_liste[1]['from_incl'];
-            }
-            else{
-                from = ens_liste[0]['from'];
-                from_incl = ens_liste[0]['from_incl'] && ens_liste[0]['from_incl'];
-            }
-        }
-        AInterStr = (from_incl?'[':']')+from+';';
-        // borne sup
-        // + infini ?
-        if(ens_liste[0]['to_inf'] && ens_liste[1]['to_inf']){
-            AInterStr += '+\\infty[';
-            IntervDessinerIntervalle(ctx_interv_inter, [{'from':from, 'from_inf': false, 'from_incl':from_incl, 'to':NaN, 'to_inf': true, 'to_incl': false}], bornes, ['red'], [2]);
-        }
-        else{
-            // au moins un des ens ne va pas à +Inf
-            let to, to_incl;
-            if(ens_liste[0]['to_inf']){
-                to = ens_liste[1]['to'];
-                to_incl = ens_liste[1]['to_incl'];
-            }
-            else if(ens_liste[1]['to_inf']){
-                to = ens_liste[0]['to'];
-                to_incl = ens_liste[0]['to_incl'];
-            }
-            else{
-                if(ens_liste[0]['to'] < ens_liste[1]['to']){
-                    to = ens_liste[0]['to'];
-                    to_incl = ens_liste[0]['to_incl'];
-
-                }
-                else if(ens_liste[0]['to'] > ens_liste[1]['to']){
-                    to = ens_liste[1]['to'];
-                    to_incl = ens_liste[1]['to_incl'];
-                }
-                else{
-                    to = ens_liste[0]['to'];
-                    to_incl = ens_liste[0]['to_incl'] && ens_liste[0]['to_incl'];
-                }
-            }
-            AInterStr += to+(to_incl?']':'[');
-            IntervDessinerIntervalle(ctx_interv_inter, [{'from':from, 'from_inf': false, 'from_incl':from_incl, 'to':to, 'to_inf': false, 'to_incl':to_incl}], bornes, ['red'], [2]);
-        }
-
-    }
+    let res = IntervCalculerResultatOperation(ens_liste, AND);
+    let ens_liste_res = res[0];
+    let AInterStr = res[1];
 
     // écrire intervalle
     document.getElementById('sp_interv_inter_resStr').innerHTML = '$A \\cap B='+AInterStr+'$';
+
+    // dessiner intervalle
+    let coord_y = [];
+    let couleurs = [];
+    for(let i=0;i<ens_liste_res.length;i++){
+        coord_y.push(2);
+        couleurs.push('red');
+    }
+    IntervDessinerIntervalle(ctx_interv_inter, ens_liste_res, bornes, couleurs, coord_y);
 
     MathJax.typeset();
     
@@ -632,176 +536,13 @@ function IntervDessinerUnion(){
     // traits rouges verticaux + étiquettes
     let bornes = IntervCalculerBornes(ens_liste);
     IntervDessinerTraitsRouges(ctx_interv_union, 'interv_union', ens_liste, bornes, 3);
-   
 
     // intervalles
     IntervDessinerIntervalle(ctx_interv_union, ens_liste, bornes, ['green', 'blue'], [0,1]);
 
-    // calculer + dessiner union
-    let nombresPertinents = IntervCalculerNombresPertinents(ens_liste);
-    let AUnionStr = '';
-    let ens_liste_res = [];
-    let ens_courant = {};
-    if(!nombresPertinents.length){
-        if(isIncludedMult(0,ens_liste,OR)){
-            // pas de bornes, 0 inclus => AuB = R
-            AUnionStr = ']-\\infty;+\\infty[';
-            ens_liste_res.push({'from':NaN, 'from_inf': true, 'from_incl':false, 'to':NaN, 'to_inf': true, 'to_incl': false});
-        }
-        else{
-            // pas de bornes, 0 pas inclus => AuB = vide
-            AUnionStr = '\\emptyset';
-            // cas impossible (les ensembles A et B ne peuvent pas être vide)
-        }
-    }
-    else{
-        // début (-inf)
-        let incl = false;
-        let sep = '';
-        if(isIncludedMult(nombresPertinents[0]-1,ens_liste,OR)){
-            // -inf
-            AUnionStr = ']-\\infty;';
-            incl = true;
-            ens_courant['from'] = NaN;
-            ens_courant['from_incl'] = false;
-            ens_courant['from_inf'] = true;
-        }
-        // milieu
-        for(let n=0;n<nombresPertinents.length-1;n++){
-            let nbCourant = nombresPertinents[n];
-            let nbSuivant = (nombresPertinents[n]+nombresPertinents[n+1])/2;
-            if(isIncludedMult(nbCourant,ens_liste,OR)){
-                if(!incl){
-                    // nbCourant est une borne inf
-                    if(!isIncludedMult(nbSuivant,ens_liste,OR)){
-                        // nbCourant est une borne inf et sup
-                        AUnionStr += sep + '\\{'+nbCourant+'\\}';
-                        sep = '\\;\\cup\\;';
-                        incl = false;
-                        ens_courant = {};
-                        ens_liste_res.push({'from':nbCourant, 'from_incl': true, 'from_inf': false, 'to': nbCourant, 'to_incl': true, 'to_inf': false});
-                    }
-                    else{
-                        // nbCourant est une borne inf mais pas sup
-                        AUnionStr += sep + '['+nbCourant+';';
-                        sep = '\\;\\cup\\;';
-                        incl = true;
-                        ens_courant['from'] = nbCourant;
-                        ens_courant['from_incl'] = true;
-                        ens_courant['from_inf'] = false;
-                    }
-                }
-                else{
-                    if(!isIncludedMult(nbSuivant,ens_liste,OR)){
-                        // nbCourant est une borne sup
-                        AUnionStr += nbCourant+']';
-                        sep = '\\;\\cup\\;';
-                        incl = false;
-                        ens_courant['to'] = nbCourant;
-                        ens_courant['to_incl'] = true;
-                        ens_courant['to_inf'] = false;
-                        ens_liste_res.push(ens_courant);
-                        ens_courant = {};
-                    }
-                }
-            
-            }
-            else{
-                if(incl){
-                    if(isIncludedMult(nbSuivant,ens_liste,OR)){
-                        // nbCourant est un trou
-                        sep = '\\;\\cup\\;';
-                        AUnionStr += nbCourant + '[' + sep + ']' + nbCourant +';';
-                        ens_courant['to'] = nbCourant;
-                        ens_courant['to_incl'] = false;
-                        ens_courant['to_inf'] = false;
-                        ens_liste_res.push(ens_courant);
-                        ens_courant = {'from':nbCourant, 'from_incl': false, 'from_inf': false};
-                    }
-                    else{
-                        // nbCourant est une borne sup
-                        AUnionStr += nbCourant + '[';
-                        sep = '\\;\\cup\\;';
-                        incl = false;
-                        ens_courant['to'] = nbCourant;
-                        ens_courant['to_incl'] = false;
-                        ens_courant['to_inf'] = false;
-                        ens_liste_res.push(ens_courant);
-                        ens_courant = {};
-                    }
-                }
-                else{
-                    if(isIncludedMult(nbSuivant,ens_liste,OR)){
-                        // nbCourant est une borne inf
-                        AUnionStr += sep + ']' + nbCourant + ';';
-                        sep = '\\;\\cup\\;';
-                        incl = true;
-                        ens_courant['from'] = nbCourant;
-                        ens_courant['from_incl'] = false;
-                        ens_courant['from_inf'] = false;
-                    }
-                }
-            }
-        }
-        // fin (+ inf)
-        let nbDernier = nombresPertinents[nombresPertinents.length-1];
-        let posInf = nbDernier+1;
-        if(isIncludedMult(nbDernier,ens_liste,OR)){
-            if(incl){
-                if(isIncludedMult(posInf,ens_liste,OR)){
-                    AUnionStr += '+\\infty[';
-                    ens_courant['to'] = NaN;
-                    ens_courant['to_incl'] = false;
-                    ens_courant['to_inf'] = true;
-                    ens_liste_res.push(ens_courant);
-                    ens_courant = {};
-                }
-                else{
-                    // nbDernier est une borne sup
-                    AUnionStr += nbDernier +']';
-                    ens_courant['to'] = nbDernier;
-                    ens_courant['to_incl'] = true;
-                    ens_courant['to_inf'] = false;
-                    ens_liste_res.push(ens_courant);
-                    ens_courant = {};
-                }
-            }
-            else{
-                if(isIncludedMult(posInf,ens_liste,OR)){
-                    AUnionStr += sep+'['+nbDernier+';+\\infty[';
-                    ens_liste_res.push({'from':nbDernier, 'from_incl': true, 'from_inf': false, 'to': NaN, 'to_incl': false, 'to_inf': true});
-                }
-                else{
-                    // nbDernier est une borne inf et sup
-                    AUnionStr += sep + '\\{'+nbDernier +'\\}';
-                    ens_liste_res.push({'from':nbDernier, 'from_incl': true, 'from_inf': false, 'to': nbDernier, 'to_incl': true, 'to_inf': false});
-                }
-            }
-        }
-        else{
-            if(incl){
-                // nbDernier est une borne sup
-                AUnionStr += nbDernier + '[';
-                ens_courant['to'] = nbDernier;
-                ens_courant['to_incl'] = false;
-                ens_courant['to_inf'] = false;
-                ens_liste_res.push(ens_courant);
-                ens_courant = {};
-                // suite incluse ?
-                if(isIncludedMult(posInf,ens_liste,OR)){
-                    AUnionStr += sep+']'+nbDernier+';+\\infty[';
-                    ens_liste_res.push({'from':nbDernier, 'from_incl': false, 'from_inf': false, 'to': NaN, 'to_incl': false, 'to_inf': true});
-                }
-            }
-            else{
-                if(isIncludedMult(posInf,ens_liste,OR)){
-                    AUnionStr += sep+']'+nbDernier+';+\\infty[';
-                    ens_liste_res.push({'from':nbDernier, 'from_incl': false, 'from_inf': false, 'to': NaN, 'to_incl': false, 'to_inf': true});
-                }
-            }
-        }
-    }
-
+    let res = IntervCalculerResultatOperation(ens_liste, OR);
+    let ens_liste_res = res[0];
+    let AUnionStr = res[1];
 
     // écrire intervalle
     document.getElementById('sp_interv_union_resStr').innerHTML = '$A \\cup B='+AUnionStr+'$';
@@ -816,6 +557,180 @@ function IntervDessinerUnion(){
     IntervDessinerIntervalle(ctx_interv_union, ens_liste_res, bornes, couleurs, coord_y);
 
     MathJax.typeset();
+
+}
+
+function IntervCalculerResultatOperation(ens_liste, operateur){
+    // calcule la chaîne de caractère et l'ensemble correspondant à l'opération 'operateur' sur les ensembles de 'ens_liste'
+
+    let nombresPertinents = IntervCalculerNombresPertinents(ens_liste);
+    let AStr = '';
+    let ens_liste_res = [];
+    let ens_courant = {};
+    if(!nombresPertinents.length){
+        if(isIncludedMult(0,ens_liste,operateur)){
+            // pas de bornes, 0 inclus => AuB = R
+            AStr = ']-\\infty;+\\infty[';
+            ens_liste_res.push({'from':NaN, 'from_inf': true, 'from_incl':false, 'to':NaN, 'to_inf': true, 'to_incl': false});
+        }
+        else{
+            // pas de bornes, 0 pas inclus => AuB = vide
+            AStr = '\\emptyset';
+            // cas impossible (les ensembles A et B ne peuvent pas être vide)
+        }
+    }
+    else{
+        // début (-inf)
+        let incl = false;
+        let sep = '';
+        if(isIncludedMult(nombresPertinents[0]-1,ens_liste,operateur)){
+            // -inf
+            AStr = ']-\\infty;';
+            incl = true;
+            ens_courant['from'] = NaN;
+            ens_courant['from_incl'] = false;
+            ens_courant['from_inf'] = true;
+        }
+        // milieu
+        for(let n=0;n<nombresPertinents.length-1;n++){
+            let nbCourant = nombresPertinents[n];
+            let nbSuivant = (nombresPertinents[n]+nombresPertinents[n+1])/2;
+            if(isIncludedMult(nbCourant,ens_liste,operateur)){
+                if(!incl){
+                    // nbCourant est une borne inf
+                    if(!isIncludedMult(nbSuivant,ens_liste,operateur)){
+                        // nbCourant est une borne inf et sup
+                        AStr += sep + '\\{'+nbCourant+'\\}';
+                        sep = '\\;\\cup\\;';
+                        incl = false;
+                        ens_courant = {};
+                        ens_liste_res.push({'from':nbCourant, 'from_incl': true, 'from_inf': false, 'to': nbCourant, 'to_incl': true, 'to_inf': false});
+                    }
+                    else{
+                        // nbCourant est une borne inf mais pas sup
+                        AStr += sep + '['+nbCourant+';';
+                        sep = '\\;\\cup\\;';
+                        incl = true;
+                        ens_courant['from'] = nbCourant;
+                        ens_courant['from_incl'] = true;
+                        ens_courant['from_inf'] = false;
+                    }
+                }
+                else{
+                    if(!isIncludedMult(nbSuivant,ens_liste,operateur)){
+                        // nbCourant est une borne sup
+                        AStr += nbCourant+']';
+                        sep = '\\;\\cup\\;';
+                        incl = false;
+                        ens_courant['to'] = nbCourant;
+                        ens_courant['to_incl'] = true;
+                        ens_courant['to_inf'] = false;
+                        ens_liste_res.push(ens_courant);
+                        ens_courant = {};
+                    }
+                }
+            
+            }
+            else{
+                if(incl){
+                    if(isIncludedMult(nbSuivant,ens_liste,operateur)){
+                        // nbCourant est un trou
+                        sep = '\\;\\cup\\;';
+                        AStr += nbCourant + '[' + sep + ']' + nbCourant +';';
+                        ens_courant['to'] = nbCourant;
+                        ens_courant['to_incl'] = false;
+                        ens_courant['to_inf'] = false;
+                        ens_liste_res.push(ens_courant);
+                        ens_courant = {'from':nbCourant, 'from_incl': false, 'from_inf': false};
+                    }
+                    else{
+                        // nbCourant est une borne sup
+                        AStr += nbCourant + '[';
+                        sep = '\\;\\cup\\;';
+                        incl = false;
+                        ens_courant['to'] = nbCourant;
+                        ens_courant['to_incl'] = false;
+                        ens_courant['to_inf'] = false;
+                        ens_liste_res.push(ens_courant);
+                        ens_courant = {};
+                    }
+                }
+                else{
+                    if(isIncludedMult(nbSuivant,ens_liste,operateur)){
+                        // nbCourant est une borne inf
+                        AStr += sep + ']' + nbCourant + ';';
+                        sep = '\\;\\cup\\;';
+                        incl = true;
+                        ens_courant['from'] = nbCourant;
+                        ens_courant['from_incl'] = false;
+                        ens_courant['from_inf'] = false;
+                    }
+                }
+            }
+        }
+        // fin (+ inf)
+        let nbDernier = nombresPertinents[nombresPertinents.length-1];
+        let posInf = nbDernier+1;
+        if(isIncludedMult(nbDernier,ens_liste,operateur)){
+            if(incl){
+                if(isIncludedMult(posInf,ens_liste,operateur)){
+                    AStr += '+\\infty[';
+                    ens_courant['to'] = NaN;
+                    ens_courant['to_incl'] = false;
+                    ens_courant['to_inf'] = true;
+                    ens_liste_res.push(ens_courant);
+                    ens_courant = {};
+                }
+                else{
+                    // nbDernier est une borne sup
+                    AStr += nbDernier +']';
+                    ens_courant['to'] = nbDernier;
+                    ens_courant['to_incl'] = true;
+                    ens_courant['to_inf'] = false;
+                    ens_liste_res.push(ens_courant);
+                    ens_courant = {};
+                }
+            }
+            else{
+                if(isIncludedMult(posInf,ens_liste,operateur)){
+                    AStr += sep+'['+nbDernier+';+\\infty[';
+                    ens_liste_res.push({'from':nbDernier, 'from_incl': true, 'from_inf': false, 'to': NaN, 'to_incl': false, 'to_inf': true});
+                }
+                else{
+                    // nbDernier est une borne inf et sup
+                    AStr += sep + '\\{'+nbDernier +'\\}';
+                    ens_liste_res.push({'from':nbDernier, 'from_incl': true, 'from_inf': false, 'to': nbDernier, 'to_incl': true, 'to_inf': false});
+                }
+            }
+        }
+        else{
+            if(incl){
+                // nbDernier est une borne sup
+                AStr += nbDernier + '[';
+                ens_courant['to'] = nbDernier;
+                ens_courant['to_incl'] = false;
+                ens_courant['to_inf'] = false;
+                ens_liste_res.push(ens_courant);
+                ens_courant = {};
+                // suite incluse ?
+                if(isIncludedMult(posInf,ens_liste,operateur)){
+                    AStr += sep+']'+nbDernier+';+\\infty[';
+                    ens_liste_res.push({'from':nbDernier, 'from_incl': false, 'from_inf': false, 'to': NaN, 'to_incl': false, 'to_inf': true});
+                }
+            }
+            else{
+                if(isIncludedMult(posInf,ens_liste,operateur)){
+                    AStr += sep+']'+nbDernier+';+\\infty[';
+                    ens_liste_res.push({'from':nbDernier, 'from_incl': false, 'from_inf': false, 'to': NaN, 'to_incl': false, 'to_inf': true});
+                }
+            }
+        }
+    }
+    if(AStr==''){
+        AStr = '\\emptyset';
+    }
+
+    return [ens_liste_res, AStr];
 
 }
 
