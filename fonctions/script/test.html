@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testeur</title>
+    <script src="fonctions_utils.js"></script>
+    <script>
+        let tests = [
+            {val:[2,1], res:'2x+1'},
+            {val:[0], res:'0'},
+            {val:[0,0], res:'0'},
+            {val:[0,1], res:'1'},
+            {val:[0,-1], res:'-1'},
+            {val:[0,42], res:'42'},
+            {val:[1,0], res:'x'},
+            {val:[-1,0], res:'-x'},
+            {val:[3,0], res:'3x'},
+            {val:[3,1], res:'3x+1'},
+            {val:[3,-2], res:'3x-2'},
+            {val:[3,0,-2], res:'3x^{2}-2'},
+        ];
+        tests.forEach(test=>{
+            let p = poly2tex(test['val']);
+            let ok = (p==test['res']?'ok':'---NOK---');
+            console.log(`attendu:${test['res']}\treçu:${p}\t${ok}`);
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

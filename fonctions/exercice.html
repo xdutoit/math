@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/math_index.css">
+    <title>Fonctions - exercice</title>
+    <style>
+        th, td{
+            padding-bottom: 20px;
+        }
+        input{
+            width: 50px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            document.querySelectorAll('.btn_fct').forEach(e => e.addEventListener('click', appliquerFonction));
+        }
+        function appliquerFonction(e) {
+            let tr_obj = getAncestorByTag(e.target, 'tr');
+            if (tr_obj) {
+                let fct_id = tr_obj.getAttribute('id');
+                let inp_in = parseFloat(document.querySelector('#'+fct_id+' .inp_in').value);
+                if(isNaN(inp_in)){
+                    alert('Veuillez entrer un nombre valide.');
+                    return false;
+                }
+                let nb_out;
+                switch(fct_id){
+                    case 'fctA':
+                        nb_out = inp_in/2;
+                        break;
+                    case 'fctB':
+                        nb_out = inp_in*4;
+                        break;
+                    case 'fctC':
+                        nb_out = inp_in*4+6;
+                        break;
+                    case 'fctD':
+                        nb_out = Math.ceil(Math.random()*10);
+                        break;
+                    case 'fctE':
+                        nb_out = 42;
+                        break;
+                    case 'fctF':
+                        nb_out = Math.sqrt(inp_in);
+                        break;
+                    case 'fctG':
+                        nb_out = inp_in*(-2)+3;
+                        break;
+                    case 'fctH':
+                        nb_out = inp_in*inp_in+2*inp_in;
+                        break;
+
+                }
+                if (isNaN(nb_out)){
+                    nb_out = 'Ce nombre n\'est pas dans l\'ensemble de départ';
+                }
+                document.querySelector('#'+fct_id+' .td_out').innerHTML = nb_out;
+            }
+
+        }
+
+        function getAncestorByTag(e, tag) {
+            // renvoie le premier ancêtre de type tag
+            tag = tag.toLowerCase();
+            let curr = e.parentNode;
+            while (curr.parentNode) {
+                //console.log(curr.tagName);
+                if (curr.tagName.toLowerCase() == tag) {
+                    return curr;
+                }
+                curr = curr.parentNode;
+            }
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="main_container">
+        <table>
+            <tr>
+                <th></th>
+                <th>Entrée</th>
+                <th></th>
+                <th>Sortie</th>
+            </tr>
+            <tr id="fctA">
+                <td>Objet a:</td>
+                <td><input class="inp_in" /></td>
+                <td><button class="btn_fct">&rarr;</button></td>
+                <td class="td_out"></td>
+            </tr>
+            <tr id="fctB">
+                <td>Objet b:</td>
+                <td><input class="inp_in" /></td>
+                <td><button class="btn_fct">&rarr;</button></td>
+                <td class="td_out"></td>
+            </tr>
+            <tr id="fctC">
+                <td>Objet c:</td>
+                <td><input class="inp_in" /></td>
+                <td><button class="btn_fct">&rarr;</button></td>
+                <td class="td_out"></td>
+            </tr>
+            <tr id="fctD">
+                <td>Objet d:</td>
+                <td><input class="inp_in" /></td>
+                <td><button class="btn_fct">&rarr;</button></td>
+                <td class="td_out"></td>
+            </tr>
+            <tr id="fctE">
+                <td>Objet e:</td>
+                <td><input class="inp_in" /></td>
+                <td><button class="btn_fct">&rarr;</button></td>
+                <td class="td_out"></td>
+            </tr>
+            <tr id="fctF">
+                <td>Objet f:</td>
+                <td><input class="inp_in" /></td>
+                <td><button class="btn_fct">&rarr;</button></td>
+                <td class="td_out"></td>
+            </tr>
+            <tr id="fctG">
+                <td>Objet g:</td>
+                <td><input class="inp_in" /></td>
+                <td><button class="btn_fct">&rarr;</button></td>
+                <td class="td_out"></td>
+            </tr>
+            <tr id="fctH">
+                <td>Objet h:</td>
+                <td><input class="inp_in" /></td>
+                <td><button class="btn_fct">&rarr;</button></td>
+                <td class="td_out"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

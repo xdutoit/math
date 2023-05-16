@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style/math_page.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../script/mathjax/mathjax-config.js"></script>
+    <script src="../script/mathjax/tex-svg.js" id="MathJax-script"></script>
+    <script src="script/fonctions_onload.js"></script>
+    <script src="script/fonctions_utils.js"></script>
+    <script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+    <script src="script/ggb_script.js"></script>
+    <title>Les fonctions de degrés 1 et 2</title>
+</head>
+<body>
+    
+    <div class="cont_ext">
+        <section>
+            <h1 id="lineaire">Fonction linéaire</h1>
+            <div class="div_subsection">
+                <h2 id="lineaire_def">Définition</h2>
+                Une fonction <strong>linéaire</strong> est une fonction de type $f(x)=mx$.<br>
+                Le paramètre $m$ est la <strong>pente</strong>.<br>
+                Une fonction linéaire passe toujours par l'origine.
+            </div>
+            <div class="div_subsection">
+                <h2 id="lineaire_ex">Exemple</h2>
+                Paramètre:<br>
+                <table>
+                    <tr>
+                        <td>$m$</td>
+                        <td><input type="range" name="inp_lin_mXsli" id="inp_lin_mXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser lin_actualiser"></td>
+                        <td><input type="number" lang="en-US" name="inp_lin_mXval" id="inp_lin_mXval" value="1" class="inpval_actualiser lin_actualiser"></td>
+                    </tr>
+                </table>
+                Equation:<br>
+                <span id="sp_lin_fct">$f(x)=x$</span><br>
+                Valeurs particulières:
+                <table>
+                    <tr>
+                        <td>zéro:</td>
+                        <td><span id="sp_lin_valpart_zero">$z=0$</span></td>
+                    </tr>
+                    <tr>
+                        <td>ordonnée à l'origine:</td>
+                        <td>$0$</td>
+                    </tr>
+                </table>
+                Graphe:<br>
+                <div id="ggbApplet_lin"></div>
+            </div>
+        </section>
+
+        <section>
+            <h1 id="affine">Fonction affine</h1>
+            <div class="div_subsection">
+                <h2 id="affine_def">Définition</h2>
+                Une fonction <strong>affine</strong> est une fonction de type $f(x)=mx+h$.<br>
+                Le paramètre $m$ est la <strong>pente</strong>.<br>
+                Le paramètre $h$ est <strong>l'ordonnée à l'origine</strong>.
+            </div>
+            <div class="div_subsection">
+                <h2 id="affine_ex">Exemple</h2>
+                Paramètre:<br>
+                <table>
+                    <tr>
+                        <td>$m$</td>
+                        <td><input type="range" name="inp_aff_mXsli" id="inp_aff_mXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser aff_actualiser"></td>
+                        <td><input type="number" lang="en-US" name="inp_aff_mXval" id="inp_aff_mXval" value="1" class="inpval_actualiser aff_actualiser"></td>
+                    </tr>
+                    <tr>
+                        <td>$h$</td>
+                        <td><input type="range" name="inp_aff_hXsli" id="inp_aff_hXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser aff_actualiser"></td>
+                        <td><input type="number" lang="en-US" name="inp_aff_hXval" id="inp_aff_hXval" value="1" class="inpval_actualiser aff_actualiser"></td>
+                    </tr>
+                </table>
+                Equation:<br>
+                <span id="sp_aff_fct">$f(x)=x+1$</span><br>
+                Valeurs particulières:
+                <table>
+                    <tr>
+                        <td>zéro:</td>
+                        <td><span id="sp_aff_valpart_zero">$z=-1$</span></td>
+                    </tr>
+                    <tr>
+                        <td>ordonnée à l'origine:</td>
+                        <td><span id="sp_aff_valpart_ordorig">$h=1$</span></td>
+                    </tr>
+                </table>
+                Graphe:<br>
+                <div id="ggbApplet_aff"></div>
+            </div>
+        </section>
+
+        <section>
+            <h1 id="quad">Fonction quadratique</h1>
+            <div class="div_subsection">
+                <h2 id="quad_def">Définition</h2>
+                Une fonction <strong>quadratique</strong> est une fonction de type $f(x)=ax^2+bx+c$.<br>
+                Le paramètre $c$ est <strong>l'ordonnée à l'origine</strong>.
+            </div>
+            <div class="div_subsection">
+                <h2 id="quad_ex">Exemple</h2>
+                Paramètre:<br>
+                <table>
+                    <tr>
+                        <td>$a$</td>
+                        <td><input type="range" name="inp_quad_aXsli" id="inp_quad_aXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser quad_actualiser"></td>
+                        <td><input type="number" lang="en-US" name="inp_quad_aXval" id="inp_quad_aXval" value="1" class="inpval_actualiser quad_actualiser"></td>
+                    </tr>
+                    <tr>
+                        <td>$b$</td>
+                        <td><input type="range" name="inp_quad_bXsli" id="inp_quad_bXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser quad_actualiser"></td>
+                        <td><input type="number" lang="en-US" name="inp_quad_bXval" id="inp_quad_bXval" value="1" class="inpval_actualiser quad_actualiser"></td>
+                    </tr>
+                    <tr>
+                        <td>$c$</td>
+                        <td><input type="range" name="inp_quad_cXsli" id="inp_quad_cXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser quad_actualiser"></td>
+                        <td><input type="number" lang="en-US" name="inp_quad_cXval" id="inp_quad_cXval" value="1" class="inpval_actualiser quad_actualiser"></td>
+                    </tr>
+                </table>
+                Equation:<br>
+                <span id="sp_quad_fct">$f(x)=x^2+x+1$</span><br>
+                Valeurs particulières:
+                <table>
+                    <tr>
+                        <td>zéro(s):</td>
+                        <td><span id="sp_quad_valpart_zero">pas de zéro</span></td>
+                    </tr>
+                    <tr>
+                        <td>ordonnée à l'origine:</td>
+                        <td><span id="sp_quad_valpart_ordorig">$c=1$</span></td>
+                    </tr>
+                </table>
+                Point particulier:
+                <table>
+                    <tr>
+                        <td>sommet:</td>
+                        <td><span id="sp_quad_ptpart_sommet">$(-0.5;0.75)$</span></td>
+                    </tr>
+                </table>
+                Graphe:<br>
+                <div id="ggbApplet_quad"></div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
