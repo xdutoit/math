@@ -16,7 +16,7 @@ function actualiserInpVal(e){
 
 function actualiserLin(){
     // actualise la fonction linéaire
-    let m = parseFloat(document.querySelector('#inp_lin_mXsli').value);
+    let m = parseFloat(document.querySelector('#inp_lin_mXval').value);
 
     // graphe
     ggbApplet_lin.setValue('m', m);
@@ -47,8 +47,8 @@ function actualiserLin(){
 
 function actualiserAff(){
     // actualise la fonction affine
-    let m = parseFloat(document.querySelector('#inp_aff_mXsli').value);
-    let h = parseFloat(document.querySelector('#inp_aff_hXsli').value);
+    let m = parseFloat(document.querySelector('#inp_aff_mXval').value);
+    let h = parseFloat(document.querySelector('#inp_aff_hXval').value);
 
     // graphe
     ggbApplet_aff.setValue('m', m);
@@ -80,9 +80,9 @@ function actualiserAff(){
 
 function actualiserQuad(){
     // actualise la fonction quadratique
-    let a = parseFloat(document.querySelector('#inp_quad_aXsli').value);
-    let b = parseFloat(document.querySelector('#inp_quad_bXsli').value);
-    let c = parseFloat(document.querySelector('#inp_quad_cXsli').value);
+    let a = parseFloat(document.querySelector('#inp_quad_aXval').value);
+    let b = parseFloat(document.querySelector('#inp_quad_bXval').value);
+    let c = parseFloat(document.querySelector('#inp_quad_cXval').value);
 
     // graphe
     ggbApplet_quad.setValue('a', a);
