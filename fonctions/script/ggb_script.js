@@ -105,6 +105,7 @@ window.onload = function() {
     applet_lin.inject('ggbApplet_lin');
     applet_aff.inject('ggbApplet_aff');
     applet_quad.inject('ggbApplet_quad');
+    
     triggerFonctionsOnload();
 };
 applet_lin.setPreviewImage('data:image/gif;base64,R0lGODlhAQABAAAAADs=','https://www.geogebra.org/images/GeoGebra_loading.png','https://www.geogebra.org/images/applet_play.png');

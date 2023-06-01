@@ -1,3 +1,5 @@
+const curseur_limites = [-1e4,1e4];
+
 function actualiserInpSli(e){
     // met à jour la valeur de l'input de type nombre pour refléter celle du slider
     let nom_arr = e.target.id.split("X");
@@ -14,9 +16,28 @@ function actualiserInpVal(e){
     document.querySelector('#'+nom_arr.join('X')).value = value;
 }
 
+function getValue(id){
+    // renvoie la valeur actuelle de l'input/range dont l'id est id
+
+    let val = parseFloat(document.querySelector('#'+id+'Xval').value);
+    if (val<curseur_limites[0] || val>curseur_limites[1]){
+        alert(`Les nombres entrés doivent être compris entre ${curseur_limites[0]} et ${curseur_limites[1]}`);
+        if(val<curseur_limites[0]){
+            val=curseur_limites[0];
+        }
+        else if (val>curseur_limites[1]){
+            val = curseur_limites[1];
+        }
+        document.querySelector('#'+id+'Xval').value = val;
+        document.querySelector('#'+id+'Xsli').value = val;
+    }
+    return val;
+
+}
+
 function actualiserLin(){
     // actualise la fonction linéaire
-    let m = parseFloat(document.querySelector('#inp_lin_mXval').value);
+    let m = getValue('inp_lin_m');//parseFloat(document.querySelector('#inp_lin_mXval').value);
 
     // graphe
     ggbApplet_lin.setValue('m', m);
@@ -47,8 +68,8 @@ function actualiserLin(){
 
 function actualiserAff(){
     // actualise la fonction affine
-    let m = parseFloat(document.querySelector('#inp_aff_mXval').value);
-    let h = parseFloat(document.querySelector('#inp_aff_hXval').value);
+    let m = getValue('inp_aff_m');//parseFloat(document.querySelector('#inp_aff_mXval').value);
+    let h = getValue('inp_aff_h');//parseFloat(document.querySelector('#inp_aff_hXval').value);
 
     // graphe
     ggbApplet_aff.setValue('m', m);
@@ -80,9 +101,11 @@ function actualiserAff(){
 
 function actualiserQuad(){
     // actualise la fonction quadratique
-    let a = parseFloat(document.querySelector('#inp_quad_aXval').value);
-    let b = parseFloat(document.querySelector('#inp_quad_bXval').value);
-    let c = parseFloat(document.querySelector('#inp_quad_cXval').value);
+    let a = getValue('inp_quad_a');//parseFloat(document.querySelector('#inp_quad_aXval').value);
+    let b = getValue('inp_quad_b');//parseFloat(document.querySelector('#inp_quad_bXval').value);
+    let c = getValue('inp_quad_c');//parseFloat(document.querySelector('#inp_quad_cXval').value);
+
+    //console.log(`actu para: ${a}; ${b}; ${c}.`)
 
     // graphe
     ggbApplet_quad.setValue('a', a);
@@ -98,6 +121,7 @@ function actualiserQuad(){
     
     // Delta
     let Delta = b*b-4*a*c;
+    //console.log(`Delta: ${Delta}`)
 
     // val part / pt part
     let zeroStr = '';
