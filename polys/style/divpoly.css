@@ -1,0 +1,13 @@
+.divpoly_table{
+    border-collapse: collapse;
+    margin-bottom: 2em;
+}
+.divpoly_table td{
+    text-align: right;
+}
+.divpolytd_bottom{
+    border-bottom: 1px solid black;
+}
+.divpolytd_right{
+    border-right: 1px solid black;
+}

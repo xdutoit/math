@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style/math_page.css">
+    <link rel="stylesheet" href="style/divpoly.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../script/mathjax/mathjax-config.js"></script>
+    <script src="../script/mathjax/tex-svg.js" id="MathJax-script"></script>
+    <script src="script/divpoly_onload.js"></script>
+    <script src="script/divpoly_utils.js"></script>
+    <title>La division polynomiale</title>
+</head>
+<body>
+    <div class="cont_ext">
+        <section>
+            <h1 id="intro">Introduction: la division euclidienne</h1>
+            La <strong>division euclidienne</strong> (aussi parfois appelée <strong>division entière</strong>) est une division qui ne traite que de nombres entiers. A un dividende $D$ et un diviseur $d$, elle associe un quotient $q$ et un reste $r$ tels que
+            \[
+             D = d \cdot q + r
+            \]
+            <div class="div_subsection">
+                <h2>Exemple: division de $79$ par $4$</h2>
+                <div class="div_twocolumns">
+                    <div class="div_column div_center" style="flex: 20%;">
+                        <table class="divpoly_table element_center" id="anim_1">
+                            <tr>
+                                <td class="divpolytd_bottom">$7$</td>
+                                <td class="divpolytd_bottom divpolytd_right">$9$</td>
+                                <td class="divpolytd_bottom">$4$</td>
+                            </tr>
+                            <tr>
+                                <td class="divpolytd_bottom anim_0_2">$4$</td>
+                                <td class="divpolytd_right">&nbsp;</td>
+                                <td><span class="anim_0_1">$1$</span><span class="anim_0_5">$9$</span></td>
+                            </tr>
+                            <tr>
+                                <td class="anim_0_3">$3$</td>
+                                <td class="divpolytd_right anim_0_4">$9$</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="divpolytd_bottom anim_0_6">$3$</td>
+                                <td class="divpolytd_bottom divpolytd_right anim_0_6">$6$</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="divpolytd_right anim_0_7">$3$</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <button id="start_0" class="btn_anim_start">animation</button>
+                        <button id="bk_0" class="btn_anim_bk" disabled>&lt;</button>
+                        <button id="fwd_0" class="btn_anim_fwd" disabled>&gt;</button>
+                    </div>
+                    <div class="div_column">
+                        étapes:
+                        <ol>
+                            <li class="anim_0_1">on regarde combien de fois on peut mettre $4$ dans $7$ (réponse: $1$)</li>
+                            <li class="anim_0_2">on multiplie le diviseur par $1$: $1 \cdot 4 = 4$</li>
+                            <li class="anim_0_3">on effectue la soustraction: $7-4=3$</li>
+                            <li class="anim_0_4">on abaisse la colonne suivante (le $9$)</li>
+                            <li class="anim_0_5">on regarde combien de fois on peut mettre $4$ dans $39$ (réponse: $9$)</li>
+                            <li class="anim_0_6">on multiplie le diviseur par $9$: $9 \cdot 4 = 36$</li>
+                            <li class="anim_0_7">on effectue la soustraction: $39-36=3$</li>
+                            <li class="anim_0_8">le reste ($3$) est plus petit que le diviseur ($4$): fin de la division !</li>
+                        </ol>
+
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </div>
+</body>
+</html>

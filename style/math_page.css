@@ -106,3 +106,32 @@ body {
 .div_interv_res{
     text-align: center;
 }
+/* colonnes */
+.div_twocolumns{
+    display: flex;
+}
+.div_twocolumns>.div_column{
+    flex: 50%;
+}
+.div_center{
+    text-align: center;
+}
+.element_center{
+    margin-left: auto;
+    margin-right: auto;
+}
+/* tableaux de signe */
+.tabsigne{
+    border-collapse: collapse;
+}
+.tabsigne td{
+    padding: .2em .5em;
+    text-align: center;
+}
+.tabsigne td:first-child{
+    border-right: 1px solid black;
+    text-align: left;
+}
+.tabsigne tr:first-child td{
+    border-bottom: 1px solid black;
+}

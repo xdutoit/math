@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style/math_page.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../script/mathjax/mathjax-config.js"></script>
+    <script src="../script/mathjax/tex-svg.js" id="MathJax-script"></script>
+    <script src="script/tabsigne_onload.js"></script>
+    <script src="script/tabsigne_utils.js"></script>
+    <script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+    <script src="script/ggb_script_tabsigne.js"></script>
+    <title>Tableaux de signe</title>
+</head>
+<body>
+    
+    <div class="cont_ext">
+        <section>
+            <h1 id="deg1">Polynôme de degré 1</h1>
+            <div class="div_subsection">
+                <h2 id="deg1_def">Définition</h2>
+                Un polynôme de degré 1 est un polynôme de la forme $f(x)=ax+b$ (avec $a \neq 0$).<br>
+                Le paramètre $a$ est la <strong>pente</strong>.
+            </div>
+            <div class="div_subsection">
+                <h2 id="deg1_ex">Exemple</h2>
+                Paramètre:<br>
+                <table>
+                    <tr>
+                        <td>$a$</td>
+                        <td><input type="range" name="inp_deg1_mXsli" id="inp_deg1_mXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser deg1_actualiser"></td>
+                        <td><input type="number" lang="en-US" name="inp_deg1_mXval" id="inp_deg1_mXval" value="1" class="inpval_actualiser deg1_actualiser"></td>
+                    </tr>
+                    <tr>
+                        <td>$b$</td>
+                        <td><input type="range" name="inp_deg1_hXsli" id="inp_deg1_hXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser deg1_actualiser"></td>
+                        <td><input type="number" lang="en-US" name="inp_deg1_hXval" id="inp_deg1_hXval" value="1" class="inpval_actualiser deg1_actualiser"></td>
+                    </tr>
+                </table>
+                Equation:<br>
+                <span id="sp_deg1_fct">$f(x)=x+1$</span><br>
+                Zéro:<br>
+                <span id="sp_deg1_valpart_zero">$x_0=-1$</span><br>
+                Graphe:<br>
+                <div id="ggbApplet_deg1"></div>
+                Tableau de signe:<br>
+                <table class="tabsigne" id="tabsigne_deg1">
+                    <tr>
+                        <td>$x$</td>
+                        <td>$-\infty$</td>
+                        <td>&nbsp;</td>
+                        <td><span id="sp_deg1_valpart_zeroVal">$-1$</span></td>
+                        <td>&nbsp;</td>
+                        <td>$+\infty$</td>
+                    </tr>
+                    <tr>
+                        <td>$f(x)$</td>
+                        <td></td>
+                        <td><span id="sp_signe_deg1_minus">$-$</span></td>
+                        <td>$0$</td>
+                        <td><span id="sp_signe_deg1_plus">$+$</span></td>
+                        <td></td>
+                    </tr>
+
+                </table>
+                <span id="sp_tabsigne_deg1_error" style="display: none;">pas de tableau de signe ($a=0$)</span>
+            </div>
+        </section>
+
+        <section>
+            <h1 id="deg2">Polynôme de degré 2</h1>
+            <div class="div_subsection">
+                <h2 id="deg2_def">Définition</h2>
+                Un polynôme de degré 2 est un polynôme de la forme $f(x)=ax^2+bx+c$ (avec $a \neq 0$).
+            </div>
+            <div class="div_subsection">
+                <h2 id="deg2_ex">Exemple</h2>
+                Paramètres:<br>
+                <table>
+                    <tr>
+                        <td>$a$</td>
+                        <td><input type="range" name="inp_deg2_aXsli" id="inp_deg2_aXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser deg2_actualiser"></td>
+                        <td><input type="text" lang="en-US" name="inp_deg2_aXval" id="inp_deg2_aXval" value="1" class="inpval_actualiser deg2_actualiser"></td>
+                    </tr>
+                    <tr>
+                        <td>$b$</td>
+                        <td><input type="range" name="inp_deg2_bXsli" id="inp_deg2_bXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser deg2_actualiser"></td>
+                        <td><input type="text" lang="en-US" name="inp_deg2_bXval" id="inp_deg2_bXval" value="1" class="inpval_actualiser deg2_actualiser"></td>
+                    </tr>
+                    <tr>
+                        <td>$c$</td>
+                        <td><input type="range" name="inp_deg2_cXsli" id="inp_deg2_cXsli" min="-10" max="10" step=".1" value="1" class="inpsli_actualiser deg2_actualiser"></td>
+                        <td><input type="text" lang="en-US" name="inp_deg2_cXval" id="inp_deg2_cXval" value="1" class="inpval_actualiser deg2_actualiser"></td>
+                    </tr>
+                </table>
+                Equation:<br>
+                <span id="sp_deg2_fct">$f(x)=x^2+x+1$</span><br>
+                Zéro(s):<br>
+                <span id="sp_deg2_valpart_zero">pas de zéro</span><br>
+                Graphe:<br>
+                <div id="ggbApplet_deg2"></div>
+                Tableau de signe:<br>
+                <table class="tabsigne" id="tabsigne_deg2_0">
+                    <tr>
+                        <td>$x$</td>
+                        <td>$-\infty$</td>
+                        <td>&nbsp;</td>
+                        <td>$+\infty$</td>
+                    </tr>
+                    <tr>
+                        <td>$f(x)$</td>
+                        <td></td>
+                        <td><span class="sp_signe_deg2_plus">$+$</span></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="tabsigne" id="tabsigne_deg2_1" style="display: none;">
+                    <tr>
+                        <td>$x$</td>
+                        <td>$-\infty$</td>
+                        <td>&nbsp;</td>
+                        <td><span id="sp_deg2_valpart_zeroValDouble">$-1$</span></td>
+                        <td>&nbsp;</td>
+                        <td>$+\infty$</td>
+                    </tr>
+                    <tr>
+                        <td>$f(x)$</td>
+                        <td></td>
+                        <td><span class="sp_signe_deg2_plus">$+$</span></td>
+                        <td>$0$</td>
+                        <td><span class="sp_signe_deg2_plus">$+$</span></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="tabsigne" id="tabsigne_deg2_2" style="display: none;">
+                    <tr>
+                        <td>$x$</td>
+                        <td>$-\infty$</td>
+                        <td>&nbsp;</td>
+                        <td><span id="sp_deg2_valpart_zeroVal1">$-1$</span></td>
+                        <td>&nbsp;</td>
+                        <td><span id="sp_deg2_valpart_zeroVal2">$1$</span></td>
+                        <td>&nbsp;</td>
+                        <td>$+\infty$</td>
+                    </tr>
+                    <tr>
+                        <td>$f(x)$</td>
+                        <td></td>
+                        <td><span class="sp_signe_deg2_plus">$+$</span></td>
+                        <td>$0$</td>
+                        <td><span class="sp_signe_deg2_minus">$-$</span></td>
+                        <td>$0$</td>
+                        <td><span class="sp_signe_deg2_plus">$+$</span></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <span id="sp_tabsigne_deg2_error" style="display: none;">pas de tableau de signe ($a=0$)</span>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

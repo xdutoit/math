@@ -35,97 +35,94 @@ function getValue(id){
 
 }
 
-function actualiserLin(){
-    // actualise la fonction linéaire
-    let m = getValue('inp_lin_m');//parseFloat(document.querySelector('#inp_lin_mXval').value);
+function actualiserDeg1(){
+    // actualise le graphe et le tableau de signe de degré 1
+    let m = getValue('inp_deg1_m');
+    let h = getValue('inp_deg1_h');
 
     // graphe
-    ggbApplet_lin.setValue('m', m);
-
-    // équation
-    let mStr = m+'';
-    if (m==1){
-        mStr = '';
-    }
-    else if(m==-1){
-        mStr = '-';
-    }
-    let xStr = 'x';
-    if(m==0){
-        xStr = '';
-    }
-    document.querySelector('#sp_lin_fct').innerHTML = `$f(x)=${mStr}${xStr}$`;
-
-    // val part
-    let zeroStr = '$z=0$';
-    if(m==0){
-        zeroStr = '$z\\in \\mathbb{R}$';
-    }
-    document.querySelector('#sp_lin_valpart_zero').innerHTML = zeroStr;
-
-    MathJax.typeset();
-}
-
-function actualiserAff(){
-    // actualise la fonction affine
-    let m = getValue('inp_aff_m');//parseFloat(document.querySelector('#inp_aff_mXval').value);
-    let h = getValue('inp_aff_h');//parseFloat(document.querySelector('#inp_aff_hXval').value);
-
-    // graphe
-    ggbApplet_aff.setValue('m', m);
-    ggbApplet_aff.setValue('h', h);
+    ggbApplet_deg1.setValue('m', m);
+    ggbApplet_deg1.setValue('h', h);
 
     // équation
     let eqStr = poly2tex([m,h]);
-    document.querySelector('#sp_aff_fct').innerHTML = `$f(x)=${eqStr}$`;
+    document.querySelector('#sp_deg1_fct').innerHTML = `$f(x)=${eqStr}$`;
+    if(m==0){
+        document.querySelector('#sp_deg2_fct').innerHTML += ' <strong>(degré 0)</strong>';
+    }
+    
 
     // val part
-    let zeroStr = '$z=0$';
+    let zeroStr = `$x_0=${num2tex(-h/m)}$`;
+    let zeroValStr = `$${num2tex(-h/m)}$`;
     if(m==0){
-        if(h==0){
-            zeroStr = '$z\\in \\mathbb{R}$';
-        }
-        else{
-            zeroStr = 'pas de zéro';
-        }
+        zeroStr = 'pas de zéro';
+        zeroValStr = '';
+    }
+    document.querySelector('#sp_deg1_valpart_zero').innerHTML = zeroStr;
+    document.querySelector('#sp_deg1_valpart_zeroVal').innerHTML = zeroValStr;
+
+    // tab signe
+    document.querySelector('#tabsigne_deg1').style.display = 'block';
+    document.querySelector('#sp_tabsigne_deg1_error').style.display = 'none';
+    if(m>0){
+        document.querySelector('#sp_signe_deg1_minus').innerHTML = '$-$';
+        document.querySelector('#sp_signe_deg1_plus').innerHTML = '$+$';
+    }
+    else if (m<0){
+        document.querySelector('#sp_signe_deg1_minus').innerHTML = '$+$';
+        document.querySelector('#sp_signe_deg1_plus').innerHTML = '$-$';
     }
     else{
-        zeroStr = `$z=${num2tex(-h/m)}$`;
+        document.querySelector('#tabsigne_deg1').style.display = 'none';
+        document.querySelector('#sp_tabsigne_deg1_error').style.display = 'inline';
     }
-    document.querySelector('#sp_aff_valpart_zero').innerHTML = zeroStr;
-    document.querySelector('#sp_aff_valpart_ordorig').innerHTML = `$h=${num2tex(h)}$`;
 
     MathJax.typeset();
 }
 
-function actualiserQuad(){
-    // actualise la fonction quadratique
-    let a = getValue('inp_quad_a');//parseFloat(document.querySelector('#inp_quad_aXval').value);
-    let b = getValue('inp_quad_b');//parseFloat(document.querySelector('#inp_quad_bXval').value);
-    let c = getValue('inp_quad_c');//parseFloat(document.querySelector('#inp_quad_cXval').value);
+function actualiserDeg2(){
+    // actualise le graphe et le tableau de signe de degré 2
+    let a = getValue('inp_deg2_a');
+    let b = getValue('inp_deg2_b');
+    let c = getValue('inp_deg2_c');
 
     //console.log(`actu para: ${a}; ${b}; ${c}.`)
 
     // graphe
-    ggbApplet_quad.setValue('a', a);
-    ggbApplet_quad.setValue('b', b);
-    ggbApplet_quad.setValue('c', c);
+    ggbApplet_deg2.setValue('a', a);
+    ggbApplet_deg2.setValue('b', b);
+    ggbApplet_deg2.setValue('c', c);
 
     // équation
     let eqStr = poly2tex([a,b,c]);
-    document.querySelector('#sp_quad_fct').innerHTML = `$f(x)=${eqStr}$`;
+    document.querySelector('#sp_deg2_fct').innerHTML = `$f(x)=${eqStr}$`;
     if(a==0){
-        document.querySelector('#sp_quad_fct').innerHTML += ' <strong>(fonction affine)</strong>';
+        document.querySelector('#sp_deg2_fct').innerHTML += ' <strong>(degré 1)</strong>';
     }
     
     // Delta
     let Delta = b*b-4*a*c;
     //console.log(`Delta: ${Delta}`)
 
-    // val part / pt part
+    // val part / tableau de signe
     let zeroStr = '';
-    let sommetStr = '';
+    document.querySelector('#tabsigne_deg2_0').style.display = 'none';
+    document.querySelector('#tabsigne_deg2_1').style.display = 'none';
+    document.querySelector('#tabsigne_deg2_2').style.display = 'none';
+    document.querySelector('#sp_tabsigne_deg2_error').style.display = 'none';
     if(a!=0){
+        if (a>0){
+            document.querySelectorAll('.sp_signe_deg2_plus').forEach(sp => {sp.innerHTML = '$+$';});
+            document.querySelectorAll('.sp_signe_deg2_minus').forEach(sp => {sp.innerHTML = '$-$';});
+        }
+        else{
+            document.querySelectorAll('.sp_signe_deg2_plus').forEach(sp => {sp.innerHTML = '$-$';});
+            document.querySelectorAll('.sp_signe_deg2_minus').forEach(sp => {sp.innerHTML = '$+$';});
+        }
+
+
+
         if(Delta>0){
             let z1 = (-b-Math.sqrt(Delta))/(2*a);
             let z2 = (-b+Math.sqrt(Delta))/(2*a);
@@ -134,22 +131,28 @@ function actualiserQuad(){
                 z1 = z2;
                 z2 = zSwap;
             }
-            zeroStr = `$z_1=${num2tex(z1)}$; $z_2=${num2tex(z2)}$ (deux zéros distincts)`;
+            zeroStr = `$x_1=${num2tex(z1)}$; $x_2=${num2tex(z2)}$ (deux zéros distincts)`;
+            document.querySelector('#sp_deg2_valpart_zeroVal1').innerHTML = `$${num2tex(z1)}$`;
+            document.querySelector('#sp_deg2_valpart_zeroVal2').innerHTML = `$${num2tex(z2)}$`;
+            document.querySelector('#tabsigne_deg2_2').style.display = 'block';
         }
         else if(Delta==0){
             let z = -b/(2*a);
-            zeroStr = `$z=${num2tex(z)}$ (zéro double)`; 
+            zeroStr = `$x_0=${num2tex(z)}$ (zéro double)`; 
+            document.querySelector('#sp_deg2_valpart_zeroValDouble').innerHTML = `$${num2tex(z)}$`;
+            document.querySelector('#tabsigne_deg2_1').style.display = 'block';
         }
         else{
             zeroStr = 'pas de zéro';
+            document.querySelector('#tabsigne_deg2_0').style.display = 'block';
         }
-        let Sx = -b/(2*a);
-        let Sy = a*Sx*Sx+b*Sx+c;
-        sommetStr = `$(${num2tex(Sx)};${num2tex(Sy)})$`;
     }
-    document.querySelector('#sp_quad_valpart_zero').innerHTML = zeroStr;
-    document.querySelector('#sp_quad_valpart_ordorig').innerHTML = `$c=${c}$`;
-    document.querySelector('#sp_quad_ptpart_sommet').innerHTML = sommetStr;
+    else{
+        document.querySelector('#sp_tabsigne_deg2_error').style.display = 'inline';
+    }
+    document.querySelector('#sp_deg2_valpart_zero').innerHTML = zeroStr;
+
+
 
     MathJax.typeset();
 }
