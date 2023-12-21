@@ -48,7 +48,7 @@ function actualiserDeg1(){
     let eqStr = poly2tex([m,h]);
     document.querySelector('#sp_deg1_fct').innerHTML = `$f(x)=${eqStr}$`;
     if(m==0){
-        document.querySelector('#sp_deg2_fct').innerHTML += ' <strong>(degré 0)</strong>';
+        document.querySelector('#sp_deg1_fct').innerHTML += ' <strong>(degré 0)</strong>';
     }
     
 
